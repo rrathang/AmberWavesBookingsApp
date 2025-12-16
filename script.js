@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         confirmationSection: document.getElementById('confirmationSection'),
         generatedOutput: document.getElementById('generatedOutput'),
         copyToast: document.getElementById('copyToast'),
-        
+
         // Calendar Elements
         calendarGrid: document.getElementById('calendarGrid'),
         monthDisplay: document.getElementById('monthDisplay'),
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /* =========================================
        INITIALIZATION
        ========================================= */
-    
+
     // Set default dates (today and tomorrow)
     const today = new Date();
     const tomorrow = new Date(today);
@@ -107,42 +107,53 @@ document.addEventListener('DOMContentLoaded', () => {
             turfEnd: elements.turfAccess.checked ? formatTime12h(document.getElementById('turfEndTime').value) : ''
         };
 
+        // Payment Calculations
+        const totalAmount = parseFloat(document.getElementById('totalAmount').value) || 0;
+        const advancePaid = parseFloat(document.getElementById('advancePaid').value) || 0;
+        const balanceAmount = totalAmount - advancePaid;
+
+        const advanceWords = numberToWords(advancePaid);
+        const balanceWords = numberToWords(balanceAmount);
+
         // Construct Message
-        let message = `Booking Confirmation: VillaHopper#70\nStay Period: ${data.checkInDate} to ${data.checkOutDate}\n\n`;
+        let message = `Booking Confirmation: Amber Waves\nStay Period: ${data.checkInDate} to ${data.checkOutDate}\n\n`;
         message += `Dear ${data.guestName},\n\n`;
-        message += `Thank you for choosing VillaHopper#70 for your stay! We are pleased to confirm your booking.\n\n`;
-        
+        message += `Thank you for choosing Amber Waves for your stay! We are pleased to confirm your booking.\n\n`;
+
         message += `*Booking Summary:*\n`;
-        message += `- *Advance Paid:* ₹6000/- (Six Thousand Only)\n`;
-        message += `- *Balance Amount (Payable at Check-in):* ₹14000/- (Fourteen Thousand Only)\n\n`;
+        message += `- *Advance Paid:* ₹${advancePaid}/- (${advanceWords})\n`;
+        message += `- *Balance Amount (Payable at Check-in):* ₹${balanceAmount}/- (${balanceWords})\n\n`;
 
         message += `*Additional Charges:*\n`;
         message += `- ₹500/- Cleaning Fee (to be paid to the caretaker)\n`;
         message += `- ₹6,000/- Refundable Security Deposit (preferably in cash or via UPI, payable at check-in)\n\n`;
 
         message += `*Property Details:*\n`;
-        message += `- *Property Name:* VillaHopper#70\n`;
-        message += `- *Location:* VillaHopper#70, Adithyaram Signature City, Pattipulam, 100ft Road, ECR\n\n`;
+        message += `- *Property Name:* Villa ${data.villa}\n`;
+        message += `- *Location:* No. 8, Manickam Nagar, Perumanttunallur, Nandhivaram, Guduvancheri, Chennai – 603202\n\n`;
 
         message += `*Stay Details:*\n`;
         message += `- *Check-in Date:* ${data.checkInDate}\n`;
         message += `- *Check-out Date:* ${data.checkOutDate}\n`;
         message += `- *Number of Guests:* ${data.numPeople}\n`;
         message += `- *Check-in Time:* ${data.checkInTime}\n`;
+        message += `- *Check-in Time:* ${data.checkInTime}\n`;
         message += `- *Check-out Time:* ${data.checkOutTime}\n`;
-        
-        // Turf Info if applicable (Not in template but requested logic implies we might want to use it? 
-        // The prompt says "Generate a formatted confirmation message exactly in the style below".
-        // The style below DOES NOT have Turf info. I will stick to the template strictly as requested.
-        // If I were to add it, it would be under Amenities or Extra, but I'll stick to strict template.)
-        
+
+        // Turf Info
+        if (data.turfAccess) {
+            message += `- *Turf Access:* Included (${data.turfStart} to ${data.turfEnd})\n`;
+        } else {
+            message += `- *Turf Access:* No Turf access for the Booking\n`;
+        }
+
         message += `\n*Amenities:*\n`;
         message += `- ${data.rooms} AC Bedrooms including a large Suite Room with attached Bathrooms\n`;
         // Note: Logic for beds could be dynamic based on villa, but prompt didn't specify mapping. Keeping static as per template default.
-        message += `- 3 King Size Beds and 4 Single Beds\n`; 
+        message += `- ${data.rooms} King Size Beds and ${data.rooms} Single Beds\n`;
         message += `- A Private Swimming Pool with an attached shower and restroom\n`;
         message += `- Play Area with TT Table, Carrom board and other board games\n`;
-        message += `- Rooftop Gazebo for candlelight dinners or casual gatherings\n`;
+        message += `- Lawn Area for casual gatherings\n`;
         message += `- Fully functional bar (we do not serve alcohol)\n`;
         message += `- Free Wi-Fi\n`;
         message += `- Inverter backup of up to 8 hours for fans and lights, but not for AC\n`;
@@ -150,8 +161,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         message += `*Contact Information:*\n`;
         message += `If you have any questions or need further assistance, please contact us:\n`;
-        message += `- *Phone:* +91-8838581697\n`;
-        message += `- *Email:* villahopper70@gmail.com\n\n`;
+        message += `- *Phone:* +91-9840267776\n`;
+        message += `- *Email:* amberwavesvillas@gmail.com\n\n`;
 
         message += `We look forward to hosting you and hope you have a memorable stay at VillaHopper#70.\n\n`;
         message += `Warm regards,\nAmberWaves`;
@@ -229,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const indicator = document.createElement('div');
                 indicator.className = 'booking-indicator';
                 div.appendChild(indicator);
-                
+
                 // Tooltip / Click interaction
                 div.title = `${booking.guestName} (${booking.villa})`;
                 div.addEventListener('click', () => {
@@ -251,16 +262,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // Simple check: is dateStr >= checkIn AND dateStr < checkOut (usually checkout day is free for next guest, but let's assume inclusive for display or exclusive logic)
         // Standard hotel logic: Check-in day IS booked. Check-out day IS booked (morning) but usually available for next Check-in.
         // For simplicity: if date is within range [checkIn, checkOut).
-        
+
         return bookingsData.find(b => {
-             return dateStr >= b.checkIn && dateStr < b.checkOut;
+            return dateStr >= b.checkIn && dateStr < b.checkOut;
         });
     }
 
     /* =========================================
        HELPERS
        ========================================= */
-       
+
     function formatDate(isoDate) {
         if (!isoDate) return '';
         const d = new Date(isoDate);
@@ -278,5 +289,25 @@ document.addEventListener('DOMContentLoaded', () => {
         const suffix = hours >= 12 ? 'PM' : 'AM';
         const hours12 = ((hours + 11) % 12 + 1);
         return `${hours12}:${minutes} ${suffix}`;
+    }
+
+    function numberToWords(num) {
+        if (num === 0) return "Zero Only";
+
+        const a = ['', 'One ', 'Two ', 'Three ', 'Four ', 'Five ', 'Six ', 'Seven ', 'Eight ', 'Nine ', 'Ten ', 'Eleven ', 'Twelve ', 'Thirteen ', 'Fourteen ', 'Fifteen ', 'Sixteen ', 'Seventeen ', 'Eighteen ', 'Nineteen '];
+        const b = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
+
+        // Simple recursive implementation
+        const numToWords = (n) => {
+            if (n < 20) return a[n];
+            if (n < 100) return b[Math.floor(n / 10)] + (n % 10 !== 0 ? ' ' + a[n % 10] : '');
+            if (n < 1000) return a[Math.floor(n / 100)] + 'Hundred ' + (n % 100 !== 0 ? 'and ' + numToWords(n % 100) : '');
+            if (n < 100000) return numToWords(Math.floor(n / 1000)) + 'Thousand ' + (n % 1000 !== 0 ? numToWords(n % 1000) : '');
+            if (n < 10000000) return numToWords(Math.floor(n / 100000)) + 'Lakh ' + (n % 100000 !== 0 ? numToWords(n % 100000) : '');
+            return numToWords(Math.floor(n / 10000000)) + 'Crore ' + (n % 10000000 !== 0 ? numToWords(n % 10000000) : '');
+        }
+
+        let str = numToWords(num).trim();
+        return str + " Only";
     }
 });
