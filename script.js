@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
 
     function generateAzureStarMessage(data, advancePaid, advanceWords, balanceAmount, balanceWords) {
-        let message = `Booking Confirmation: Amber Waves (Azure Star)\nStay Period: ${data.checkInDate} to ${data.checkOutDate}\n\n`;
+        let message = `Booking Confirmation: Amber Wave (Azure Star)\nStay Period: ${data.checkInDate} to ${data.checkOutDate}\n\n`;
         message += `Dear ${data.guestName},\n\n`;
         message += `Thank you for choosing Amber Waves for your stay! We are pleased to confirm your booking.\n\n`;
 
@@ -184,13 +184,14 @@ document.addEventListener('DOMContentLoaded', () => {
         message += `- *Email:* amberwavesvillas@gmail.com\n\n`;
 
         message += `We look forward to hosting you and hope you have a memorable stay at Villa Azure Star.\n\n`;
-        message += `Warm regards,\nAmberWaves`;
+        message += `Warm regards,\nAmber Wave\n`;
+        message += `Villas & Homestays`;
 
         return message;
     }
 
     function generateEmeraldGreenMessage(data, advancePaid, advanceWords, balanceAmount, balanceWords) {
-        let message = `Booking Confirmation: Amber Waves (Emerald Green)\nStay Period: ${data.checkInDate} to ${data.checkOutDate}\n\n`;
+        let message = `Booking Confirmation: Amber Wave (Emerald Green)\nStay Period: ${data.checkInDate} to ${data.checkOutDate}\n\n`;
         message += `Dear ${data.guestName},\n\n`;
         message += `Thank you for choosing Amber Waves for your stay! We are pleased to confirm your booking.\n\n`;
 
@@ -236,7 +237,8 @@ document.addEventListener('DOMContentLoaded', () => {
         message += `- *Email:* amberwavesvillas@gmail.com\n\n`;
 
         message += `We look forward to hosting you and hope you have a memorable stay at Villa Emerald Green.\n\n`;
-        message += `Warm regards,\nAmberWaves`;
+        message += `Warm regards,\nAmber Wave\n`;
+        message += `Villas & Homestays`;
 
         return message;
     }
