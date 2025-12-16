@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function generateAzureStarMessage(data, advancePaid, advanceWords, balanceAmount, balanceWords) {
         let message = `Booking Confirmation: Amber Wave (Azure Star)\nStay Period: ${data.checkInDate} to ${data.checkOutDate}\n\n`;
         message += `Dear ${data.guestName},\n\n`;
-        message += `Thank you for choosing Amber Waves for your stay! We are pleased to confirm your booking.\n\n`;
+        message += `Thank you for choosing Amber Wave for your stay! We are pleased to confirm your booking.\n\n`;
 
         message += `*Booking Summary:*\n`;
         message += `- *Advance Paid:* ₹${advancePaid}/- (${advanceWords})\n`;
@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function generateEmeraldGreenMessage(data, advancePaid, advanceWords, balanceAmount, balanceWords) {
         let message = `Booking Confirmation: Amber Wave (Emerald Green)\nStay Period: ${data.checkInDate} to ${data.checkOutDate}\n\n`;
         message += `Dear ${data.guestName},\n\n`;
-        message += `Thank you for choosing Amber Waves for your stay! We are pleased to confirm your booking.\n\n`;
+        message += `Thank you for choosing Amber Wave for your stay! We are pleased to confirm your booking.\n\n`;
 
         message += `*Booking Summary:*\n`;
         message += `- *Advance Paid:* ₹${advancePaid}/- (${advanceWords})\n`;
