@@ -1,0 +1,16 @@
+[
+  {
+    "guestName": "Aravind Kumar",
+    "checkIn": "2024-12-24",
+    "checkOut": "2024-12-26",
+    "villa": "Azure Star",
+    "rooms": 3
+  },
+  {
+    "guestName": "Sarah Jones",
+    "checkIn": "2024-12-28",
+    "checkOut": "2024-12-30",
+    "villa": "Emerald Green",
+    "rooms": 5
+  }
+]
