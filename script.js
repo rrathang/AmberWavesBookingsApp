@@ -152,7 +152,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         message += `*Property Details:*\n`;
         message += `- *Property Name:* Villa Azure Star\n`;
-        message += `- *Location:* No. 8, Manickam Nagar, Perumanttunallur, Nandhivaram, Guduvancheri, Chennai – 603202\n\n`;
+        message += `- *Location:* No. 8, Manickam Nagar, Perumanttunallur, Nandhivaram, Guduvancheri, Chennai – 603202\n`;
+        message += `- *Google Maps:* https://maps.app.goo.gl/9vSo8Sore7UJh9DT6\n\n`;
 
         message += `*Stay Details:*\n`;
         message += `- *Check-in Date:* ${data.checkInDate}\n`;
@@ -205,7 +206,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         message += `*Property Details:*\n`;
         message += `- *Property Name:* Villa Emerald Green\n`;
-        message += `- *Location:* No. 8, Manickam Nagar, Perumanttunallur, Nandhivaram, Guduvancheri, Chennai – 603202\n\n`;
+        message += `- *Location:* No. 8, Manickam Nagar, Perumanttunallur, Nandhivaram, Guduvancheri, Chennai – 603202\n`;
+        message += `- *Google Maps:* https://maps.app.goo.gl/9vSo8Sore7UJh9DT6\n\n`;
 
         message += `*Stay Details:*\n`;
         message += `- *Check-in Date:* ${data.checkInDate}\n`;
