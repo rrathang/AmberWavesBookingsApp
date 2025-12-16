@@ -116,7 +116,29 @@ document.addEventListener('DOMContentLoaded', () => {
         const balanceWords = numberToWords(balanceAmount);
 
         // Construct Message
-        let message = `Booking Confirmation: Amber Waves\nStay Period: ${data.checkInDate} to ${data.checkOutDate}\n\n`;
+        let message = "";
+
+        if (data.villa === "Azure Star") {
+            message = generateAzureStarMessage(data, advancePaid, advanceWords, balanceAmount, balanceWords);
+        } else if (data.villa === "Emerald Green") {
+            message = generateEmeraldGreenMessage(data, advancePaid, advanceWords, balanceAmount, balanceWords);
+        } else {
+            // Fallback or Generic
+            message = generateGenericMessage(data, advancePaid, advanceWords, balanceAmount, balanceWords);
+        }
+
+        // Output
+        elements.generatedOutput.value = message;
+        elements.confirmationSection.classList.remove('d-none');
+        elements.confirmationSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // ==========================================
+    // VILLA SPECIFIC MESSAGE GENERATORS
+    // ==========================================
+
+    function generateAzureStarMessage(data, advancePaid, advanceWords, balanceAmount, balanceWords) {
+        let message = `Booking Confirmation: Amber Waves (Azure Star)\nStay Period: ${data.checkInDate} to ${data.checkOutDate}\n\n`;
         message += `Dear ${data.guestName},\n\n`;
         message += `Thank you for choosing Amber Waves for your stay! We are pleased to confirm your booking.\n\n`;
 
@@ -129,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
         message += `- ₹6,000/- Refundable Security Deposit (preferably in cash or via UPI, payable at check-in)\n\n`;
 
         message += `*Property Details:*\n`;
-        message += `- *Property Name:* Villa ${data.villa}\n`;
+        message += `- *Property Name:* Villa Azure Star\n`;
         message += `- *Location:* No. 8, Manickam Nagar, Perumanttunallur, Nandhivaram, Guduvancheri, Chennai – 603202\n\n`;
 
         message += `*Stay Details:*\n`;
@@ -137,10 +159,8 @@ document.addEventListener('DOMContentLoaded', () => {
         message += `- *Check-out Date:* ${data.checkOutDate}\n`;
         message += `- *Number of Guests:* ${data.numPeople}\n`;
         message += `- *Check-in Time:* ${data.checkInTime}\n`;
-        message += `- *Check-in Time:* ${data.checkInTime}\n`;
         message += `- *Check-out Time:* ${data.checkOutTime}\n`;
 
-        // Turf Info
         if (data.turfAccess) {
             message += `- *Turf Access:* Included (${data.turfStart} to ${data.turfEnd})\n`;
         } else {
@@ -148,11 +168,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         message += `\n*Amenities:*\n`;
-        message += `- ${data.rooms} AC Bedrooms including a large Suite Room with attached Bathrooms\n`;
-        // Note: Logic for beds could be dynamic based on villa, but prompt didn't specify mapping. Keeping static as per template default.
+        message += `- ${data.rooms} AC Bedrooms with attached Bathrooms\n`;
         message += `- ${data.rooms} King Size Beds and ${data.rooms} Single Beds\n`;
-        message += `- A Private Swimming Pool with an attached shower and restroom\n`;
-        message += `- Play Area with TT Table, Carrom board and other board games\n`;
+        message += `- A Private Swimming Pool\n`;
+        // Excluded: Play Area (Azure Star requested removal)
         message += `- Lawn Area for casual gatherings\n`;
         message += `- Fully functional bar (we do not serve alcohol)\n`;
         message += `- Free Wi-Fi\n`;
@@ -164,13 +183,68 @@ document.addEventListener('DOMContentLoaded', () => {
         message += `- *Phone:* +91-9840267776\n`;
         message += `- *Email:* amberwavesvillas@gmail.com\n\n`;
 
-        message += `We look forward to hosting you and hope you have a memorable stay at VillaHopper#70.\n\n`;
+        message += `We look forward to hosting you and hope you have a memorable stay at Villa Azure Star.\n\n`;
         message += `Warm regards,\nAmberWaves`;
 
-        // Output
-        elements.generatedOutput.value = message;
-        elements.confirmationSection.classList.remove('d-none');
-        elements.confirmationSection.scrollIntoView({ behavior: 'smooth' });
+        return message;
+    }
+
+    function generateEmeraldGreenMessage(data, advancePaid, advanceWords, balanceAmount, balanceWords) {
+        let message = `Booking Confirmation: Amber Waves (Emerald Green)\nStay Period: ${data.checkInDate} to ${data.checkOutDate}\n\n`;
+        message += `Dear ${data.guestName},\n\n`;
+        message += `Thank you for choosing Amber Waves for your stay! We are pleased to confirm your booking.\n\n`;
+
+        message += `*Booking Summary:*\n`;
+        message += `- *Advance Paid:* ₹${advancePaid}/- (${advanceWords})\n`;
+        message += `- *Balance Amount (Payable at Check-in):* ₹${balanceAmount}/- (${balanceWords})\n\n`;
+
+        message += `*Additional Charges:*\n`;
+        message += `- ₹500/- Cleaning Fee (to be paid to the caretaker)\n`;
+        message += `- ₹6,000/- Refundable Security Deposit (preferably in cash or via UPI, payable at check-in)\n\n`;
+
+        message += `*Property Details:*\n`;
+        message += `- *Property Name:* Villa Emerald Green\n`;
+        message += `- *Location:* No. 8, Manickam Nagar, Perumanttunallur, Nandhivaram, Guduvancheri, Chennai – 603202\n\n`;
+
+        message += `*Stay Details:*\n`;
+        message += `- *Check-in Date:* ${data.checkInDate}\n`;
+        message += `- *Check-out Date:* ${data.checkOutDate}\n`;
+        message += `- *Number of Guests:* ${data.numPeople}\n`;
+        message += `- *Check-in Time:* ${data.checkInTime}\n`;
+        message += `- *Check-out Time:* ${data.checkOutTime}\n`;
+
+        if (data.turfAccess) {
+            message += `- *Turf Access:* Included (${data.turfStart} to ${data.turfEnd})\n`;
+        } else {
+            message += `- *Turf Access:* No Turf access for the Booking\n`;
+        }
+
+        message += `\n*Amenities:*\n`;
+        message += `- ${data.rooms} AC Bedrooms including a large Room with attached Bathrooms\n`;
+        message += `- ${data.rooms} King Size Beds and ${data.rooms} Single Beds\n`;
+        message += `- A Private Swimming Pool\n`;
+        message += `- Play Area with TT Table, Carrom board and other board games\n`;
+        message += `- Lawn Area for casual gatherings\n`;
+        // Excluded: Bar (Emerald Green requested removal)
+        message += `- Free Wi-Fi\n`;
+        message += `- Inverter backup of up to 8 hours for fans and lights, but not for AC\n`;
+        message += `- Ample parking space\n\n`;
+
+        message += `*Contact Information:*\n`;
+        message += `If you have any questions or need further assistance, please contact us:\n`;
+        message += `- *Phone:* +91-9840267776\n`;
+        message += `- *Email:* amberwavesvillas@gmail.com\n\n`;
+
+        message += `We look forward to hosting you and hope you have a memorable stay at Villa Emerald Green.\n\n`;
+        message += `Warm regards,\nAmberWaves`;
+
+        return message;
+    }
+
+    function generateGenericMessage(data, advancePaid, advanceWords, balanceAmount, balanceWords) {
+        // Fallback or generic logic if other villas added later
+        // Just copy Azure Star for now or generic structure
+        return generateAzureStarMessage(data, advancePaid, advanceWords, balanceAmount, balanceWords);
     }
 
     function copyToClipboard() {
