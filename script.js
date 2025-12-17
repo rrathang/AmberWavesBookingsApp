@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const val = e.target.value;
         if (val === 'Azure Star') {
             elements.numRooms.value = 3;
-        } else if (val === 'Emerald Green') {
+        } else if (val === 'Emerald Glow') {
             elements.numRooms.value = 5;
         }
     });
@@ -120,8 +120,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (data.villa === "Azure Star") {
             message = generateAzureStarMessage(data, advancePaid, advanceWords, balanceAmount, balanceWords);
-        } else if (data.villa === "Emerald Green") {
-            message = generateEmeraldGreenMessage(data, advancePaid, advanceWords, balanceAmount, balanceWords);
+        } else if (data.villa === "Emerald Glow") {
+            message = generateEmeraldGlowMessage(data, advancePaid, advanceWords, balanceAmount, balanceWords);
         } else {
             // Fallback or Generic
             message = generateGenericMessage(data, advancePaid, advanceWords, balanceAmount, balanceWords);
@@ -191,8 +191,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return message;
     }
 
-    function generateEmeraldGreenMessage(data, advancePaid, advanceWords, balanceAmount, balanceWords) {
-        let message = `Booking Confirmation: Amber Wave (Emerald Green)\nStay Period: ${data.checkInDate} to ${data.checkOutDate}\n\n`;
+    function generateEmeraldGlowMessage(data, advancePaid, advanceWords, balanceAmount, balanceWords) {
+        let message = `Booking Confirmation: Amber Wave (Emerald Glow)\nStay Period: ${data.checkInDate} to ${data.checkOutDate}\n\n`;
         message += `Dear ${data.guestName},\n\n`;
         message += `Thank you for choosing Amber Wave for your stay! We are pleased to confirm your booking.\n\n`;
 
@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
         message += `- ₹6,000/- Refundable Security Deposit (preferably in cash or via UPI, payable at check-in)\n\n`;
 
         message += `*Property Details:*\n`;
-        message += `- *Property Name:* Villa Emerald Green\n`;
+        message += `- *Property Name:* Villa Emerald Glow\n`;
         message += `- *Location:* No. 8, Manickam Nagar, Perumanttunallur, Nandhivaram, Guduvancheri, Chennai – 603202\n`;
         message += `- *Google Maps:* https://maps.app.goo.gl/9vSo8Sore7UJh9DT6\n\n`;
 
@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
         message += `- A Private Swimming Pool\n`;
         message += `- Play Area with TT Table, Carrom board and other board games\n`;
         message += `- Lawn Area for casual gatherings\n`;
-        // Excluded: Bar (Emerald Green requested removal)
+        // Excluded: Bar (Emerald Glow requested removal)
         message += `- Free Wi-Fi\n`;
         message += `- Inverter backup of up to 8 hours for fans and lights, but not for AC\n`;
         message += `- Ample parking space\n\n`;
@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
         message += `- *Phone:* +91-9840267776\n`;
         message += `- *Email:* amberwavesvillas@gmail.com\n\n`;
 
-        message += `We look forward to hosting you and hope you have a memorable stay at Villa Emerald Green.\n\n`;
+        message += `We look forward to hosting you and hope you have a memorable stay at Villa Emerald Glow.\n\n`;
         message += `Warm regards,\nAmber Wave\n`;
         message += `Villas & Homestays`;
 
